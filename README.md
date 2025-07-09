@@ -2,6 +2,12 @@
 
 A modern, extensible chatbot flow builder built with React and React Flow. This application allows users to create chatbot conversation flows by connecting message nodes through a visual drag-and-drop interface.
 
+## 🌐 Live Demo
+
+**[View Live Application](https://chatbot-flow-builder-lac.vercel.app/)**
+
+Experience the full functionality of the chatbot flow builder in your browser!
+
 ## 🚀 Features
 
 ### Core Functionality
@@ -11,12 +17,10 @@ A modern, extensible chatbot flow builder built with React and React Flow. This 
 - **Real-time Editing**: Live updates when editing node content
 - **Flow Validation**: Validates flow structure before saving
 
-### Technical Features
-- **Extensible Architecture**: Easy to add new node types in the future
-- **React Flow Integration**: Built on top of the powerful React Flow library
-- **Modern React**: Uses React 18 with hooks and functional components
-- **Responsive Design**: Works on different screen sizes
-- **TypeScript Ready**: Codebase is structured to easily migrate to TypeScript
+### Handle System
+- **Source Handles**: Each node can have only ONE outgoing connection (enforced automatically)
+- **Target Handles**: Each node can accept MULTIPLE incoming connections
+- **Smart Connection Management**: Automatically replaces existing connections when creating new ones from source handles
 
 ### UI/UX Features
 - **Nodes Panel**: Sidebar with available node types for drag-and-drop
@@ -32,30 +36,43 @@ A modern, extensible chatbot flow builder built with React and React Flow. This 
 - **Target Handles**: Each node can accept MULTIPLE incoming connections
 
 ### Validation Rules
-- **Flow Validation**: Error shown if more than one node exists and more than one node has empty target handles
-- **Connection Limits**: Source handles are limited to one edge, target handles can have multiple
+- **Save Validation**: Error shown if more than one node exists and more than one node has empty target handles
+- **Flow Integrity**: Ensures proper flow structure before allowing save operations
 
-## 📦 Installation
+## 🎯 Getting Started
 
-1. Clone the repository:
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd chatbot-flow-builder
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm run dev
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:5173`
+
+### Build for Production
+
 ```bash
-git clone <repository-url>
-cd chatbot-flow-builder
+npm run build
 ```
 
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm run dev
-```
-
-4. Open your browser and navigate to `http://localhost:5173`
-
-## 🏗️ Project Structure
+## 📁 Project Structure
 
 ```
 src/
@@ -79,54 +96,48 @@ src/
 2. **Click to Add**: Click on a node type in the panel to add it to the center of the canvas
 
 ### Editing Nodes
-1. Click on any node to select it
-2. The right panel will switch to "Settings Panel"
-3. Edit the message text in the text field
-4. Changes are applied in real-time
-5. Click the back arrow to return to the Nodes Panel
+1. **Select Node**: Click on any node to select it
+2. **Edit Content**: The settings panel will appear on the right with a text field
+3. **Real-time Updates**: Changes are reflected immediately in the node
+4. **Return to Nodes**: Click the back arrow to return to the nodes panel
 
 ### Connecting Nodes
-1. Click and drag from a node's source handle (right side)
-2. Connect to another node's target handle (left side)
-3. Each source handle can only have one outgoing connection
-4. Target handles can accept multiple incoming connections
+1. **Drag from Source**: Drag from the right handle (source) of any node
+2. **Connect to Target**: Drop on the left handle (target) of another node
+3. **Automatic Replacement**: If a source already has a connection, it will be replaced with the new one
 
 ### Saving Flows
-1. Click the "Save Changes" button in the top-right corner
-2. The system will validate your flow:
-   - ✅ Single node flows are always valid
-   - ✅ Multiple nodes where only one has no incoming connections
-   - ❌ Multiple nodes where more than one has no incoming connections
-3. Valid flows will be saved successfully
-4. Invalid flows will show an error message
+1. **Save Button**: Click the "Save Changes" button in the top-right
+2. **Validation**: The system will validate the flow structure
+3. **Error Handling**: If validation fails, an error message will be displayed
+4. **Success Feedback**: Successful saves show a confirmation message
 
-## 🔧 Development
+## ⚠️ Validation Rules
 
-### Available Scripts
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
+### Save Validation
+The save operation will fail with an error message if:
+- **Multiple Nodes Exist**: There are more than one nodes in the flow
+- **Multiple Empty Targets**: More than one node has no incoming connections (empty target handles)
 
-### Adding New Node Types
-The architecture is designed to be extensible. To add new node types:
+This ensures that flows have a proper structure with a clear starting point.
 
-1. Create a new node component in `src/components/FlowBuilder/`
-2. Add the node type to the `nodeTypes` object in `FlowBuilder.jsx`
-3. Add the new node type to the `nodeTypes` array in `NodesPanel.jsx`
-4. Update the `SettingsPanel.jsx` to handle the new node type's properties
+## 🔧 Technical Implementation
 
-## 🎨 Styling
+### Built With
+- **React 18**: Modern React with hooks and functional components
+- **React Flow**: Professional flow builder library
+- **Vite**: Fast build tool and development server
+- **Modern JavaScript**: ES6+ features and best practices
 
-The application uses a modern, clean design with:
-- **Teal Color Scheme**: Primary color #319795 for consistency
-- **Responsive Layout**: Adapts to different screen sizes
-- **Smooth Animations**: Hover effects and transitions
-- **Clear Visual Hierarchy**: Distinct panels and components
+### Key Features
+- **Extensible Architecture**: Easy to add new node types
+- **Performance Optimized**: Uses React.memo and useCallback for optimal performance
+- **Responsive Design**: Works on desktop and tablet devices
+- **Clean Code**: Well-documented and maintainable codebase
 
-## 📋 Requirements Compliance
+## ✅ Requirements Compliance
 
-This project fulfills all the specified requirements:
+This implementation fully satisfies all specified requirements:
 
 - ✅ Built with React and React Flow
 - ✅ Supports Text Message nodes
@@ -162,7 +173,11 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🛠️ Built With
 
-- **React 18** - UI framework
-- **React Flow** - Flow diagram library
-- **Vite** - Build tool and development server
-- **Modern JavaScript** - ES6+ features
+- [React](https://reactjs.org/) - UI Library
+- [React Flow](https://reactflow.dev/) - Flow Builder Library
+- [Vite](https://vitejs.dev/) - Build Tool
+- [Vercel](https://vercel.com/) - Deployment Platform
+
+---
+
+**[🌐 Live Demo](https://chatbot-flow-builder-lac.vercel.app/)** | **[📧 Contact](mailto:your-email@example.com)** | **[🐛 Report Issues](https://github.com/your-username/chatbot-flow-builder/issues)**
